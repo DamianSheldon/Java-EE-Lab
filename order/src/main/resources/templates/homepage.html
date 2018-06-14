@@ -1,10 +1,20 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<!DOCTYPE HTML>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 
+<head th:include="layout/partials/head (pageTitle='Order Java Persistence Example')"></head>
+
+<body>
+    <th:block th:replace="layout/partials/nav" />
+
+    <div class="main">
+        
+    </div>
+
+    <th:block layout:fragment="post-content" />
+
+    <footer th:replace="layout/partials/footer"></footer>
 </body>
 </html>
