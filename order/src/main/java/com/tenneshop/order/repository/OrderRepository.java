@@ -7,5 +7,5 @@ import org.springframework.data.repository.CrudRepository;
 import com.tenneshop.order.entity.CustomerOrder;
 
 public interface OrderRepository extends CrudRepository<CustomerOrder, Long> {
-	List<CustomerOrder> findAllOrdersById(String orderId);
+	List<CustomerOrder> findAllOrdersByOrderId(String orderId);
 }
