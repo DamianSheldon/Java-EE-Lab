@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HomepageController extends BroadleafAbstractController {
 	
-	private static String HOMEPAGE_VIEW = "homepage";
+	private static String homepageView = "homepage";
 	
 	@RequestMapping("/")
 	public String homepage() {
 		
-		return HOMEPAGE_VIEW;
+		return homepageView;
 	}
 }
