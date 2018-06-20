@@ -1,6 +1,7 @@
 package com.tenneshop.order.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.Column;
@@ -37,7 +38,7 @@ public class Vendor implements Serializable {
     private String address;
     private String contact;
     private String phone;
-    private Collection<VendorPart> vendorParts;
+    private Collection<VendorPart> vendorParts = new ArrayList<VendorPart>();
     
     public Vendor() {}
     

@@ -11,12 +11,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.data.jpa.repository.support.JpaEntityInformationSupport;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.tenneshop.order.entity.CustomerOrder;
 import com.tenneshop.order.repository.OrderRepositoryImpl;
 
 @SpringBootApplication
 @EnableJpaRepositories(repositoryBaseClass = OrderRepositoryImpl.class)
+@EnableTransactionManagement
 public class OrderApplication implements CommandLineRunner {
 
 	public static void main(String[] args) {
