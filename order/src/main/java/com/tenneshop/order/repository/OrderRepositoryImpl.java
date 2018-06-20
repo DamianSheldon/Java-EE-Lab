@@ -1,22 +1,23 @@
 package com.tenneshop.order.repository;
 
-//import java.io.Serializable;
-//import java.util.List;
-//import java.util.Optional;
-//
-//import javax.persistence.EntityManager;
-//
-//import org.springframework.data.jpa.repository.support.JpaEntityInformation;
-//import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
-//import org.springframework.stereotype.Repository;
-//
-//import com.tenneshop.order.entity.CustomerOrder;
+import java.io.Serializable;
+import java.util.List;
+import java.util.Optional;
 
-public class OrderRepositoryImpl/*<T, ID extends Serializable> extends SimpleJpaRepository<T, ID>*/ {
+import javax.persistence.EntityManager;
 
-	/*public OrderRepositoryImpl(JpaEntityInformation entityInformation, EntityManager entityManager) {
+import org.springframework.data.jpa.repository.support.JpaEntityInformation;
+import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.tenneshop.order.entity.CustomerOrder;
+
+@Repository
+public class OrderRepositoryImpl<T, ID extends Serializable> extends SimpleJpaRepository<T, ID> {
+
+	public OrderRepositoryImpl(JpaEntityInformation<T, ?> entityInformation, EntityManager entityManager) {
 		super(entityInformation, entityManager);
-	}*/
+	}
 	
 	public void prepopulateTestOrders() {
 		
