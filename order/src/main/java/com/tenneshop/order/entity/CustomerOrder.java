@@ -20,7 +20,7 @@ import static javax.persistence.CascadeType.ALL;
 @Entity
 @Table(name="PERSISTENCE_ORDER_CUSTOMERORDER")
 @NamedQuery(
-    name="findAllOrders",
+    name="CustomerOrder.findAllOrders",
     query="SELECT co FROM CustomerOrder co " +
           "ORDER BY co.orderId"
 )

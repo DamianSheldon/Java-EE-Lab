@@ -11,7 +11,30 @@
 
     <div class="main">
         
-        <div th:if="${orders.length} > 0"></div>
+        <div th:if="${orders.size()} > 0">
+        	<table>
+        		<thead>
+        			<tr>
+        				<th>Order Id</th>
+        				<th>Shipment Info</th>
+        				<th>Status</th>
+        				<th>Last Updated</th>
+        				<th>Discount</th>
+        				<th>Actions</th>
+        			</tr>
+        		</thead>
+        		<tbody>
+        			<tr th:each="o : ${orders}">
+        				<td th:text="${o.getOrderId()}">1234</td>
+        				<td th:text="${o.getShipmentInfo()}">333 New Court, New City, CA 90000</td>
+        				<td th:text="${o.getStatus()}">X</td>
+        				<td th:text="${o.getLastUpdate()}">Fri Jun 22 15:39:42 CST 2018</td>
+        				<td th:text="|${o.getDiscount()}%|">10%</td>
+        				<td>Delete</td>
+        			</tr>
+        		</tbody>
+        	</table>
+        </div>
         
     </div>
 
