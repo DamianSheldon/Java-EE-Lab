@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
@@ -133,7 +134,7 @@ public class Part implements Serializable {
         this.bomPart = bomPart;
     }
 
-    @OneToMany(mappedBy="bomPart")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy="bomPart")
     public List<Part> getParts() {
         return parts;
     }

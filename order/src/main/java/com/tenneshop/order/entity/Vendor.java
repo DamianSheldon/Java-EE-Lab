@@ -6,6 +6,7 @@ import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -96,7 +97,7 @@ public class Vendor implements Serializable {
         this.phone = phone;
     }
 
-    @OneToMany(cascade=ALL, mappedBy="vendor")
+    @OneToMany(cascade=ALL, mappedBy="vendor", fetch = FetchType.EAGER)
     public Collection<VendorPart> getVendorParts() {
         return vendorParts;
     }

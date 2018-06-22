@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -91,7 +92,7 @@ public class CustomerOrder implements Serializable {
         this.shipmentInfo = shipmentInfo;
     }
     
-    @OneToMany(cascade=ALL, mappedBy="customerOrder")
+    @OneToMany(cascade=ALL, mappedBy="customerOrder", fetch = FetchType.EAGER)
     public Collection<LineItem> getLineItems() {
         return lineItems;
     }
