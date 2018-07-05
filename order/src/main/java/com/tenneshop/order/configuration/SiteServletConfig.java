@@ -10,5 +10,7 @@ public class SiteServletConfig extends WebMvcConfigurerAdapter {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/css/**")
             .addResourceLocations("classpath:/css/");
+        registry.addResourceHandler("/js/**")
+        .addResourceLocations("classpath:/js/");
     }
 }

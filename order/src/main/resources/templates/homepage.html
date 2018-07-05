@@ -2,44 +2,92 @@
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
 <!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
 <!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
 
-<head th:include="layout/partials/head (pageTitle='Order Java Persistence Example')"></head>
+<head
+	th:include="layout/partials/head (pageTitle='Order Java Persistence Example')">
+		
+	</head>
 
 <body>
-    <th:block th:replace="layout/partials/nav" />
+	<th:block th:replace="layout/partials/nav" />
 
-    <div class="main">
-        
-        <div th:if="${orders.size()} > 0">
-        	<table>
-        		<thead>
-        			<tr>
-        				<th>Order Id</th>
-        				<th>Shipment Info</th>
-        				<th>Status</th>
-        				<th>Last Updated</th>
-        				<th>Discount</th>
-        				<th>Actions</th>
-        			</tr>
-        		</thead>
-        		<tbody>
-        			<tr th:each="o : ${orders}">
-        				<td th:text="${o.getOrderId()}">1234</td>
-        				<td th:text="${o.getShipmentInfo()}">333 New Court, New City, CA 90000</td>
-        				<td th:text="${o.getStatus()}">X</td>
-        				<td th:text="${o.getLastUpdate()}">Fri Jun 22 15:39:42 CST 2018</td>
-        				<td th:text="|${o.getDiscount()}%|">10%</td>
-        				<td>Delete</td>
-        			</tr>
-        		</tbody>
-        	</table>
-        </div>
-        
-    </div>
+	<div class="main">
 
-    <th:block layout:fragment="post-content" />
+		<div th:if="${orders.size()} > 0">
+			<h2>View All Orders</h2>
+			<table>
+				<thead>
+					<tr>
+						<th>Order Id</th>
+						<th>Shipment Info</th>
+						<th>Status</th>
+						<th>Last Updated</th>
+						<th>Discount</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="o : ${orders}">
+						<td th:text="${o.getOrderId()}">1234</td>
+						<td th:text="${o.getShipmentInfo()}">333 New Court, New City,
+							CA 90000</td>
+						<td th:text="${o.getStatus()}">X</td>
+						<td th:text="${o.getLastUpdate()}">Fri Jun 22 15:39:42 CST
+							2018</td>
+						<td th:text="|${o.getDiscount()}%|">10%</td>
+						<td>Delete</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 
-    <footer th:replace="layout/partials/footer"></footer>
+		<h2>Create New Order</h2>
+		<form id="createOrderForm">
+			<p>
+				<label for="orderIdInputText">Order ID:</label> <input
+					id="orderIdInputText" type="text" name="orderId" />
+			</p>
+
+			<p>
+				<label for="shipmentInfoInputText">Shipment Info:</label> <input
+					id="shipmentInfoInputText" type="text" name="shipmentInfo" />
+			</p>
+
+			<p>
+				<label for="statusMenu">Status:</label> <select id="statusMenu"
+					name="status">
+					<option value="Y">Complete</option>
+					<option value="N">Pending</option>
+				</select>
+			</p>
+
+			<p>
+				<label for="discountMenu">Discount:</label> <select
+					id="discountMenu" name="discount">
+					<option value="0">0 %</option>
+					<option value="5">5 %</option>
+					<option value="10">10 %</option>
+					<option value="15">15 %</option>
+					<option value="20">20 %</option>
+					<option value="25">35 %</option>
+					<option value="30">30 %</option>
+					<option value="35">35 %</option>
+					<option value="40">40 %</option>
+				</select>
+			</p>
+
+			<p>
+				<input type="submit" value="Submit" />
+			</p>
+		</form>
+
+	</div>
+
+	<th:block layout:fragment="post-content" />
+
+	<footer th:replace="layout/partials/footer"></footer>
 </body>
 </html>
