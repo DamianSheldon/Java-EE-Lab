@@ -1,10 +1,13 @@
 package com.tenneshop.core.config;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.sql.DataSource;
 
+import org.broadleafcommerce.common.extensibility.context.merge.Merge;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.config.MapFactoryBean;
@@ -36,4 +39,14 @@ public class CorePersistenceConfig {
 
         return mapFactoryBean;
     }
+    
+    @Merge(targetRef = "blMergedPersistenceXmlLocations", early = true)
+    public List<String> corePersistenceXmlLocations() {
+        return Arrays.asList("classpath*:/META-INF/persistence-core.xml");
+    }
+    
+//    @Merge(targetRef = "blMergedEntityContexts", early = true)
+//    public List<String> entityConfigurationLocations() {
+//        return Arrays.asList("classpath:applicationContext-entity.xml");
+//    }
 }
