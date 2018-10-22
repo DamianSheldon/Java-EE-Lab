@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Implementation-Title: Tenne Admin
 Implementation-Version: 1.0.0-SNAPSHOT
-Built-By: meiliang
+Built-By: dongmeiliang
 Implementation-Vendor-Id: com.tenneshop
-Build-Jdk: 1.8.0_121
+Build-Jdk: 1.8.0_92
 Implementation-URL: http://projects.spring.io/spring-boot/broadleaf-bo
  ot-starter-parent/tenne/tenne-admin/
 Created-By: Maven Integration for Eclipse
