@@ -17,13 +17,10 @@ public class SiteSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			.formLogin()
-				.permitAll()
-				.and()
-			.httpBasic()
 				.and()
 			.authorizeRequests()
-				.anyRequest()
-				.authenticated()
+				.antMatchers("/").permitAll()
+				.anyRequest().authenticated()
 				.and()
 			.requiresChannel()
 				.anyRequest()
