@@ -96,38 +96,16 @@ public class SiteConfig {
      */
     @Bean
     public EmbeddedServletContainerFactory tomcatEmbeddedServletContainerFactory(@Value("${http.server.port:9090}") int httpServerPort) {
-        TomcatEmbeddedServletContainerFactory tomcat = new TomcatEmbeddedServletContainerFactory() {
-
-            @Override
-            protected void postProcessContext(Context context) {
-                SecurityConstraint securityConstraint = new SecurityConstraint();
-                securityConstraint.setUserConstraint("CONFIDENTIAL");
-                SecurityCollection collection = new SecurityCollection();
-                collection.addPattern("/*");
-                securityConstraint.addCollection(collection);
-                context.addConstraint(securityConstraint);
-            }
-        };
+        TomcatEmbeddedServletContainerFactory tomcat = new TomcatEmbeddedServletContainerFactory();
         
-        tomcat.addAdditionalTomcatConnectors(createRedirectConnector(httpServerPort, httpsServerPort));
-
-//        tomcat.addAdditionalTomcatConnectors(createStandardConnector(httpServerPort));
+        tomcat.addAdditionalTomcatConnectors(createStandardConnector(httpServerPort));
         return tomcat;
     }
     
-//    private Connector createStandardConnector(int port) {
-//        Connector connector = new Connector("org.apache.coyote.http11.Http11NioProtocol");
-//        connector.setPort(port);
-//        return connector;
-//    }
-    
-    private Connector createRedirectConnector(@Value("${http.server.port:9090}") int httpServerPort,
-    		int httpsServerPort) {
+    private Connector createStandardConnector(int port) {
         Connector connector = new Connector("org.apache.coyote.http11.Http11NioProtocol");
-        connector.setScheme("http");
-        connector.setPort(httpServerPort);
-        connector.setSecure(false);
-        connector.setRedirectPort(httpsServerPort);
+        connector.setPort(port);
         return connector;
     }
+    
 }

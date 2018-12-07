@@ -39,14 +39,16 @@ public class SiteSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/favicon.ico");
     }
 	
+	@Value("${server.port:9443}")
+	private int httpsServerPort;
+	
+	@Value("${http.server.port:9090}") 
+	int httpServerPort;
+	
+	// @formatter:off
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
-			.sessionManagement()
-				.sessionFixation()
-				.none()
-				.enableSessionUrlRewriting(false)
-				.and()
 			.formLogin()
 				.and()
 			.authorizeRequests()
@@ -55,9 +57,12 @@ public class SiteSecurityConfig extends WebSecurityConfigurerAdapter {
 				.and()
 			.requiresChannel()
 				.anyRequest()
-				.requiresSecure();
+				.requiresSecure()
+				.and()
+			.portMapper().http(httpServerPort).mapsTo(httpsServerPort);
 	}
-
+	// @formatter:on
+	
 	@Bean(name="blAuthenticationManager")
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
