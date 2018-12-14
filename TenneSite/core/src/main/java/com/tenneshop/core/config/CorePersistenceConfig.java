@@ -7,10 +7,14 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
+import org.broadleafcommerce.common.demo.AutoImportPersistenceUnit;
+import org.broadleafcommerce.common.demo.AutoImportSql;
+import org.broadleafcommerce.common.demo.AutoImportStage;
 import org.broadleafcommerce.common.extensibility.context.merge.Merge;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.config.MapFactoryBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnResource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -49,4 +53,10 @@ public class CorePersistenceConfig {
 //    public List<String> entityConfigurationLocations() {
 //        return Arrays.asList("classpath:applicationContext-entity.xml");
 //    }
+    
+    @Bean
+    @ConditionalOnResource(resources = "classpath:/sql/prepopulate_customers.sql")
+    public AutoImportSql blPrivateDemoCustomerData() {
+    	return new AutoImportSql(AutoImportPersistenceUnit.BL_PU,"/sql/prepopulate_customers.sql", AutoImportStage.PRIMARY_LATE);
+    }
 }

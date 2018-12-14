@@ -2,7 +2,7 @@
     <h3 class="card-title">Login</h3>
 </div>
 
-<blc:form th:action="@{/login_post.htm}" method="post">
+<blc:form th:action="@{/login}" method="post">
     <input type="hidden" name="successUrl" th:if="${successUrl}" th:value="${successUrl}"/>
 
     <div class="input-group">
