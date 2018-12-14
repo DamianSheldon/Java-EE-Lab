@@ -1,8 +1,15 @@
 package com.tenneshop.configuration;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.Filter;
 
+import org.broadleafcommerce.common.security.BroadleafAuthenticationFailureHandler;
+import org.broadleafcommerce.common.security.handler.SecurityFilter;
+import org.broadleafcommerce.core.web.order.security.BroadleafAuthenticationSuccessHandler;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -13,6 +20,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.RedirectStrategy;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -21,6 +31,44 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 public class SiteSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Configuration
+    public static class DependencyConfiguration {
+
+        @Bean
+        protected AuthenticationFailureHandler blAuthenticationFailureHandler(@Qualifier("blAuthenticationFailureRedirectStrategy") RedirectStrategy redirectStrategy) {
+            BroadleafAuthenticationFailureHandler response = new BroadleafAuthenticationFailureHandler("/login?error=true");
+            response.setRedirectStrategy(redirectStrategy);
+            return response;
+        }
+
+        @Bean
+        protected AuthenticationSuccessHandler blAuthenticationSuccessHandler(@Qualifier("blAuthenticationSuccessRedirectStrategy") RedirectStrategy redirectStrategy) {
+            BroadleafAuthenticationSuccessHandler handler = new BroadleafAuthenticationSuccessHandler();
+            handler.setRedirectStrategy(redirectStrategy);
+            handler.setDefaultTargetUrl("/");
+            handler.setTargetUrlParameter("successUrl");
+            handler.setAlwaysUseDefaultTargetUrl(false);
+            return handler;
+        }
+
+        @Bean
+        protected Filter blCsrfFilter() {
+            SecurityFilter securityFilter = new SecurityFilter();
+            List<String> excludedRequestPatterns = new ArrayList<>();
+            excludedRequestPatterns.add("/sample-checkout/**");
+            excludedRequestPatterns.add("/hosted/sample-checkout/**");
+            securityFilter.setExcludedRequestPatterns(excludedRequestPatterns);
+            return securityFilter;
+        }
+
+    }
+    
+    @Resource(name="blAuthenticationSuccessHandler")
+    protected AuthenticationSuccessHandler successHandler;
+
+    @Resource(name="blAuthenticationFailureHandler")
+    protected AuthenticationFailureHandler failureHandler;
+    
 	@Resource(name="blSessionFixationProtectionFilter")
     protected Filter sessionFixationProtectionFilter;
 	
@@ -50,6 +98,10 @@ public class SiteSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			.formLogin()
+				.loginPage("/login")
+				.successHandler(successHandler)
+                .failureHandler(failureHandler)
+                .permitAll()
 				.and()
 			.authorizeRequests()
 				.antMatchers("/").permitAll()
