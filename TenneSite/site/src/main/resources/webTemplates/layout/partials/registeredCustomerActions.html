@@ -12,8 +12,8 @@
     </ul>
 </li> -->
 
-<li><span th:text="#{home.welcome}">Welcome</span>, <a th:href="@{/account}" th:text="${customer.firstName}" class="account">Leaf</a><span th:text=" (${customer.averageHeatRatingBought})"></span></li>
-
-<!-- <li><span th:text="#{home.welcome}">Welcome</span>, <a th:href="@{/account}" th:text="${customer.firstName}" class="account">Leaf</a></li>
+<!-- <li><span th:text="#{home.welcome}">Welcome</span>, <a th:href="@{/account}" th:text="${customer.firstName}" class="account">Leaf</a><span th:text=" (${customer.averageHeatRatingBought})"></span></li>
  -->
+<li><span th:text="#{home.welcome}">Welcome</span>, <a th:href="@{/account}" th:text="${customer.firstName}" class="account">Leaf</a></li>
+
 <li><a th:href="@{/logout}" th:utext="#{home.logout}">Logout</a></li>

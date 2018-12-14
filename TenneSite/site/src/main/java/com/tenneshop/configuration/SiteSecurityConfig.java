@@ -97,6 +97,7 @@ public class SiteSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
+			.csrf().disable()
 			.formLogin()
 				.loginPage("/login")
 				.successHandler(successHandler)
@@ -104,7 +105,7 @@ public class SiteSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
 				.and()
 			.authorizeRequests()
-				.antMatchers("/").permitAll()
+				.antMatchers("/", "/register").permitAll()
 				.anyRequest().authenticated()
 				.and()
 			.requiresChannel()
