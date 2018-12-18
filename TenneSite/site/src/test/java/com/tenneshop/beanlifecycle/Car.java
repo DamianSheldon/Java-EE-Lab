@@ -76,4 +76,24 @@ public class Car implements BeanFactoryAware, BeanNameAware, InitializingBean, D
 	public void myDestroy() {
 		System.out.println("Invoke myDestroy() ...");
 	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+
+	public int getMaxSpeed() {
+		return maxSpeed;
+	}
+
+	public void setMaxSpeed(int maxSpeed) {
+		this.maxSpeed = maxSpeed;
+	}
+
+	public String getBrand() {
+		return brand;
+	}
 }
