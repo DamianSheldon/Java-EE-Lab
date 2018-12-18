@@ -1,5 +1,8 @@
 package com.tenneshop.beanlifecycle;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
@@ -13,7 +16,10 @@ public class Car implements BeanFactoryAware, BeanNameAware, InitializingBean, D
 	private String color;
 	private int maxSpeed;
 	
+	@SuppressWarnings("unused")
 	private BeanFactory beanFactory;
+	
+	@SuppressWarnings("unused")
 	private String beanName;
 
 	public Car() {
@@ -24,6 +30,10 @@ public class Car implements BeanFactoryAware, BeanNameAware, InitializingBean, D
 		System.out.println("Invoke setBrand() ...");
 		
 		this.brand = brand;
+	}
+	
+	public void introduce() {
+		System.out.println("brand: " + brand + ";color: " + color + ";maxSpeed: " + maxSpeed);
 	}
 	
 	// BeanFactoryAware
@@ -46,13 +56,24 @@ public class Car implements BeanFactoryAware, BeanNameAware, InitializingBean, D
 	// InitializingBean
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		
+		System.out.println("Invoke InitializingBean afterPropertiesSet ...");
 	}
 	
 	// DisposableBean
 	@Override
 	public void destroy() throws Exception {
-		
+		System.out.println("Invoke DisposableBean destroy ...");
 	}
 	
+	@PostConstruct
+	public void myInit() {
+		System.out.println("Invoke myInit() set maxSpeed to 240 ...");
+		
+		maxSpeed = 240;
+	}
+	
+	@PreDestroy
+	public void myDestroy() {
+		System.out.println("Invoke myDestroy() ...");
+	}
 }
