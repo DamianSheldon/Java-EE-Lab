@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
@@ -38,6 +39,20 @@ public class BeanLifeCycleTests {
 
 	@Test
 	public void testBeanLifeCycleInApplicationContext() throws Exception {
-		fail("Not yet implemented");
+		ClassPathXmlApplicationContext appCtx = new ClassPathXmlApplicationContext("com/tenneshop/beanlifecycle/application-context-beans.xml");
+		
+		Car car1 = (Car) appCtx.getBean("car");
+		
+		assertNotNull(car1);
+		assertNotEquals(car1.getBrand(), "RedFlagCA72");
+		assertEquals(car1.getBrand(), "CheryQQ");
+		car1.introduce();
+		car1.setColor("Red");
+		
+		Car car2 = (Car) appCtx.getBean("car");
+		
+		System.out.println("car1 == car2: " + (car1 == car2));
+		
+		appCtx.close();
 	}
 }
