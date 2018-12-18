@@ -92,12 +92,11 @@ public class SiteSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Value("${http.server.port:9090}") 
 	int httpServerPort;
-	
+
 	// @formatter:off
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
-			.csrf().disable()
 			.formLogin()
 				.loginPage("/login")
 				.successHandler(successHandler)
