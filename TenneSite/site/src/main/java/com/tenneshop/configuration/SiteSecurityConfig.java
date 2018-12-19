@@ -23,6 +23,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -93,10 +94,19 @@ public class SiteSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Value("${http.server.port:9090}") 
 	int httpServerPort;
 
+	@Resource(name="blCsrfFilter")
+    protected Filter securityFilter;
+	
+	/*
+	 * Note: Broadleaf ecommerce implements its own csrf, so we disable Spring Security's default csrf
+	 * Securing Thymeleaf Forms Against CSRF Attacks in Broadleaf Commerce
+	 * https://www.broadleafcommerce.com/blog/Securing-Thymeleaf-Forms-Against-CSRF-Attacks-In-Broadleaf-Commerce
+	 * */
 	// @formatter:off
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
+			.csrf().disable()
 			.formLogin()
 				.loginPage("/login")
 				.successHandler(successHandler)
@@ -111,6 +121,7 @@ public class SiteSecurityConfig extends WebSecurityConfigurerAdapter {
 				.anyRequest()
 				.requiresSecure()
 				.and()
+			.addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
 			.portMapper().http(httpServerPort).mapsTo(httpsServerPort);
 	}
 	// @formatter:on

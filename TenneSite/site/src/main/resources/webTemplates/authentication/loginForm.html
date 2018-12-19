@@ -40,8 +40,4 @@
         <a class="account" th:href="@{/login/forgotPassword}"><span
                 th:utext="#{login.forgotPassword}">Forgot Password</span></a>
     </div>
-    
-    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-
-<!--      <input type="hidden" th:name="${csrfToken.parameterName}" th:value="${csrfToken.token}"/>
- --> </blc:form>
+</blc:form>
