@@ -115,7 +115,8 @@ public class SiteSecurityConfig extends WebSecurityConfigurerAdapter {
 				.and()
 			.authorizeRequests()
 				.antMatchers("/",  "/hot-sauces/*", "/merchandise", "/clearance", "/mens", "/womens",
-						"/register", "/login/resetPassword", "/login/forgotPassword").permitAll()
+						"/register", "/login/resetPassword", "/login/forgotPassword", 
+						"/cart/*").permitAll()
 				.anyRequest().authenticated()
 				.and()
 			.requiresChannel()
