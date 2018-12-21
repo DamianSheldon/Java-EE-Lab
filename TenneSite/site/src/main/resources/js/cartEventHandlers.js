@@ -80,9 +80,9 @@ $body.on('click', '.js-addToCart, .js-addToWishlist', function(e) {
             } else if (isUpdateRequest) {
                 window.location = '/cart';
             }
+            
+            $button.unbind('click');
         }
-
-        $button.unbind('click');
     });
 
     return false;
