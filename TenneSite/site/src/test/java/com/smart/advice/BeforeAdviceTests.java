@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 import org.springframework.aop.framework.ProxyFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class BeforeAdviceTests {
 
@@ -25,6 +27,19 @@ public class BeforeAdviceTests {
 		proxy.serveTo("Tom");
 		
 		assertTrue(true);
+	}
+	
+	@Test
+	public void testSpringBeforeAdvice() throws Exception {
+		String xmlConfigPath = "com/smart/advice/beans.xml";
+		
+		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext(xmlConfigPath);
+		
+		Waiter waiter = (Waiter) ctx.getBean("waiter");
+		waiter.greetTo("John");
+		waiter.serveTo("Tom");
+		
+		ctx.close();
 	}
 
 }
