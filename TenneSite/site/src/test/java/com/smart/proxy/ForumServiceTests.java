@@ -19,7 +19,7 @@ public class ForumServiceTests {
 	}
 
 	@Test
-	public void testForumServicePureBusinessVersion() {
+	public void testJDKProxy() {
 		ForumServicePureBusinessVersionImpl forumService = new ForumServicePureBusinessVersionImpl();
 		
 		PerfermanceHandler perfermanceHandler = new PerfermanceHandler(forumService);
