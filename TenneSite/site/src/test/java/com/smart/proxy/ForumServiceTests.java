@@ -2,6 +2,8 @@ package com.smart.proxy;
 
 import static org.junit.Assert.*;
 
+import java.lang.reflect.Proxy;
+
 import org.junit.Test;
 
 public class ForumServiceTests {
@@ -16,4 +18,19 @@ public class ForumServiceTests {
 		assertTrue(true);
 	}
 
+	@Test
+	public void testForumServicePureBusinessVersion() {
+		ForumServicePureBusinessVersionImpl forumService = new ForumServicePureBusinessVersionImpl();
+		
+		PerfermanceHandler perfermanceHandler = new PerfermanceHandler(forumService);
+		
+		ForumService forumServiceProxy = (ForumService)Proxy
+				.newProxyInstance(forumService.getClass().getClassLoader(), 
+				forumService.getClass().getInterfaces(), perfermanceHandler);
+		
+		forumServiceProxy.removeTopic(8);
+		forumServiceProxy.removeForum(1024);
+		
+		assertTrue(true);
+	}
 }
