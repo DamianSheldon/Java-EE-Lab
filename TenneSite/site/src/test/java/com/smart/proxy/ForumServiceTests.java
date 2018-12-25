@@ -33,4 +33,17 @@ public class ForumServiceTests {
 		
 		assertTrue(true);
 	}
+	
+	@Test
+	public void testCGLibProxy() {
+		CglibProxy proxy = new CglibProxy();
+		
+		ForumServicePureBusinessVersionImpl forumServiceProxy = (ForumServicePureBusinessVersionImpl)proxy.getProxy(ForumServicePureBusinessVersionImpl.class);
+		
+		forumServiceProxy.removeTopic(8);
+		forumServiceProxy.removeForum(1024);
+		
+		assertTrue(true);
+	}
+	
 }
