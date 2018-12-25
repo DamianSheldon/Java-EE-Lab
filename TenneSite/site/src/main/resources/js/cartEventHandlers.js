@@ -68,6 +68,9 @@ $body.on('click', '.js-addToCart, .js-addToWishlist', function(e) {
     }, function(data, extraData) {
         if (data.error) {
             Cart.handleAddToCartError(data, $container);
+            
+            // Rebind click event so product can be readd
+            $button.bind('click');
         } else {
             $errorSpan.hide();
             $productOptionsSpan.hide();
