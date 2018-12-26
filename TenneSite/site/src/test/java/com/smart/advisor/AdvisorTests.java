@@ -27,4 +27,18 @@ public class AdvisorTests {
 		assertTrue(true);
 	}
 
+	@Test
+	public void testRegexpMethodPointcutAdvisor() {
+		String xmlConfigPath = "com/smart/advisor/beans.xml";
+		
+		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext(xmlConfigPath);
+		
+		Waiter waiter = (Waiter) ctx.getBean("waiter1");
+		waiter.greetTo("John");
+		waiter.serveTo("Tom");
+		
+		ctx.close();
+		
+		assertTrue(true);
+	}
 }
