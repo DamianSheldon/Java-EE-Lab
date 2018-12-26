@@ -67,7 +67,7 @@
 		</property>
 	</bean>
 	
-	<bean id="waiter4" class="org.springframework.aop.framework.ProxyFactoryBean" p:interceptorNames="controlFlowAdvisor" 
+	<bean id="waiter4" class="org.springframework.aop.framework.ProxyFactoryBean" p:interceptorNames="composableAdvisor" 
 	p:proxyTargetClass="true" p:target-ref="waiterTarget"></bean>
 	
 </beans>
