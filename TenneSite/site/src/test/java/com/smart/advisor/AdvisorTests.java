@@ -41,4 +41,20 @@ public class AdvisorTests {
 		
 		assertTrue(true);
 	}
+	
+	@Test
+	public void testDynamicAdvisor() throws Exception {
+		String xmlConfigPath = "com/smart/advisor/beans.xml";
+		
+		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext(xmlConfigPath);
+		
+		Waiter waiter = (Waiter) ctx.getBean("waiter2");
+		waiter.greetTo("John");
+		waiter.serveTo("Tom");
+		
+		ctx.close();
+		
+		assertTrue(true);
+	}
+	
 }
