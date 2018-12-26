@@ -49,8 +49,12 @@ public class AdvisorTests {
 		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext(xmlConfigPath);
 		
 		Waiter waiter = (Waiter) ctx.getBean("waiter2");
+		
+		waiter.serveTo("Peter");
+		waiter.greetTo("Peter");
+		
+		waiter.serveTo("John");
 		waiter.greetTo("John");
-		waiter.serveTo("Tom");
 		
 		ctx.close();
 		

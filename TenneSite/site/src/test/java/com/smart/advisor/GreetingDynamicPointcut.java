@@ -40,7 +40,7 @@ public class GreetingDynamicPointcut extends DynamicMethodMatcherPointcut {
 	
 	@Override
 	public boolean matches(Method method, Class<?> targetClass, Object... args) {
-		System.out.println("Invoke matches(method, targetClass, args) make static check for " + method.getName());
+		System.out.println("Invoke matches(method, targetClass, args) make dynamic check for " + method.getName());
 
 		String clientName = (String) args[0];
 		
