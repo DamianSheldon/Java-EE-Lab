@@ -55,4 +55,19 @@
 	
 	<bean id="waiter3" class="org.springframework.aop.framework.ProxyFactoryBean" p:interceptorNames="controlFlowAdvisor" 
 	p:proxyTargetClass="true" p:target-ref="waiterTarget"></bean>
+	
+	<bean id="gcp" class="com.smart.advisor.GreetingComposablePointcut"></bean>
+	
+	<bean id="composableAdvisor" class="org.springframework.aop.support.DefaultPointcutAdvisor" p:pointcut="#{gcp.intersectionPointcut}">
+		<!-- <property name="pointcut">
+			<ref bean="#{gcp.intersectionPointcut}"/>
+		</property> -->
+		<property name="advice">
+			<ref bean="greetingAdvice"/>
+		</property>
+	</bean>
+	
+	<bean id="waiter4" class="org.springframework.aop.framework.ProxyFactoryBean" p:interceptorNames="controlFlowAdvisor" 
+	p:proxyTargetClass="true" p:target-ref="waiterTarget"></bean>
+	
 </beans>
