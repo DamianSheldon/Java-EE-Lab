@@ -39,4 +39,20 @@
 	<bean id="waiter2" class="org.springframework.aop.framework.ProxyFactoryBean" p:interceptorNames="dynamicAdvisor" 
 	p:proxyTargetClass="true" p:target-ref="waiterTarget"></bean>
 	
+	<bean id="conflowPointcut" class="org.springframework.aop.support.ControlFlowPointcut">
+		<constructor-arg type="java.lang.Class" value="com.smart.advisor.WaiterDelegate"></constructor-arg>
+		<constructor-arg type="java.lang.String" value="service"></constructor-arg>
+	</bean>
+	
+	<bean id="controlFlowAdvisor" class="org.springframework.aop.support.DefaultPointcutAdvisor">
+		<property name="pointcut">
+			<ref bean="conflowPointcut"/>
+		</property>
+		<property name="advice">
+			<ref bean="greetingAdvice"/>
+		</property>
+	</bean>
+	
+	<bean id="waiter3" class="org.springframework.aop.framework.ProxyFactoryBean" p:interceptorNames="controlFlowAdvisor" 
+	p:proxyTargetClass="true" p:target-ref="waiterTarget"></bean>
 </beans>

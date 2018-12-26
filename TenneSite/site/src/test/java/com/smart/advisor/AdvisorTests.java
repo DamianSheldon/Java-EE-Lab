@@ -61,4 +61,25 @@ public class AdvisorTests {
 		assertTrue(true);
 	}
 	
+	@Test
+	public void testControlFlowAdvisor() throws Exception {
+		String xmlConfigPath = "com/smart/advisor/beans.xml";
+		
+		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext(xmlConfigPath);
+		
+		Waiter waiter = (Waiter) ctx.getBean("waiter3");
+		
+		waiter.serveTo("Peter");
+		waiter.greetTo("Peter");
+		
+		WaiterDelegate wd = new WaiterDelegate();
+		wd.setWaiter(waiter);
+		
+		wd.service("Peter");
+		
+		ctx.close();
+		
+		assertTrue(true);
+	}
+	
 }
