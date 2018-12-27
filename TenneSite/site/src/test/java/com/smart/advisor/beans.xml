@@ -58,10 +58,9 @@
 	
 	<bean id="gcp" class="com.smart.advisor.GreetingComposablePointcut"></bean>
 	
-	<bean id="composableAdvisor" class="org.springframework.aop.support.DefaultPointcutAdvisor" p:pointcut="#{gcp.intersectionPointcut}">
-		<!-- <property name="pointcut">
-			<ref bean="#{gcp.intersectionPointcut}"/>
-		</property> -->
+	<bean id="composableAdvisor" class="org.springframework.aop.support.DefaultPointcutAdvisor" >
+		<property name="pointcut" value="#{gcp.intersectionPointcut}">
+		</property>
 		<property name="advice">
 			<ref bean="greetingAdvice"/>
 		</property>
