@@ -60,4 +60,65 @@ public class AdvisorTests {
 		assertTrue(true);
 	}
 	
+	@Test
+	public void testControlFlowAdvisor() throws Exception {
+		String xmlConfigPath = "com/smart/advisor/beans.xml";
+		
+		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext(xmlConfigPath);
+		
+		Waiter waiter = (Waiter) ctx.getBean("waiter3");
+		
+		waiter.serveTo("Peter");
+		waiter.greetTo("Peter");
+		
+		WaiterDelegate wd = new WaiterDelegate();
+		wd.setWaiter(waiter);
+		
+		wd.service("Peter");
+		
+		ctx.close();
+		
+		assertTrue(true);
+	}
+	
+	@Test
+	public void testComposableAdvisor() throws Exception {
+		String xmlConfigPath = "com/smart/advisor/beans.xml";
+		
+		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext(xmlConfigPath);
+		
+		Waiter waiter = (Waiter) ctx.getBean("waiter4");
+		
+		waiter.serveTo("Peter");
+		waiter.greetTo("Peter");
+		
+		WaiterDelegate wd = new WaiterDelegate();
+		wd.setWaiter(waiter);
+		
+		wd.service("Peter");
+		
+		ctx.close();
+		
+		assertTrue(true);
+	}
+	
+	@Test
+	public void testBeanNameAutoProxyCreator() throws Exception {
+		String xmlConfigPath = "com/smart/advisor/beans.xml";
+		
+		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext(xmlConfigPath);
+		
+		Waiter waiter = (Waiter) ctx.getBean("waiter5");
+
+		Seller seller = (Seller) ctx.getBean("seller5");
+		
+		waiter.greetTo("John");
+		
+		seller.greetTo("Tom");
+		
+		ctx.close();
+		
+		assertTrue(true);
+	}
+	
 }
