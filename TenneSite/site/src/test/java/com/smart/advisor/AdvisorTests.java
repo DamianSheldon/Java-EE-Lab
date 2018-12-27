@@ -103,4 +103,23 @@ public class AdvisorTests {
 		assertTrue(true);
 	}
 	
+	@Test
+	public void testBeanNameAutoProxyCreator() throws Exception {
+		String xmlConfigPath = "com/smart/advisor/beans.xml";
+		
+		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext(xmlConfigPath);
+		
+		Waiter waiter = (Waiter) ctx.getBean("waiter5");
+
+		Seller seller = (Seller) ctx.getBean("seller5");
+		
+		waiter.greetTo("John");
+		
+		seller.greetTo("Tom");
+		
+		ctx.close();
+		
+		assertTrue(true);
+	}
+	
 }

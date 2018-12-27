@@ -69,4 +69,9 @@
 	<bean id="waiter4" class="org.springframework.aop.framework.ProxyFactoryBean" p:interceptorNames="composableAdvisor" 
 	p:proxyTargetClass="true" p:target-ref="waiterTarget"></bean>
 	
+	<bean id="waiter5" class="com.smart.advice.NaiveWaiter"></bean>
+	<bean id="seller5" class="com.smart.advisor.Seller"></bean>
+	
+	<bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator" p:beanNames="waiter5,seller5" p:interceptorNames="greetingAdvice" p:optimize="true"></bean>
+	
 </beans>
