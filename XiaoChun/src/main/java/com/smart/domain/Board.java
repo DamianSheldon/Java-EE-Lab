@@ -1,10 +1,16 @@
 package com.smart.domain;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cache;
@@ -33,6 +39,9 @@ public class Board extends BaseDomain {
 	
 	@Column(name = "topic_num")
 	private int topicNum;
+
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "manBoards", fetch = FetchType.LAZY)
+    private Set<User> users = new HashSet<User>();
 
 	public int getBoradId() {
 		return boradId;
@@ -66,4 +75,11 @@ public class Board extends BaseDomain {
 		this.topicNum = topicNum;
 	}
 	
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
 }
