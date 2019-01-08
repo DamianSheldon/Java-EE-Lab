@@ -4,7 +4,12 @@ import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -15,6 +20,9 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Entity
 @Table(name = "t_post")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "post_type", discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorValue("1")
 public class Post extends BaseDomain {
 
 	/**
@@ -34,8 +42,8 @@ public class Post extends BaseDomain {
 	@Column(name = "board_id")
 	private int boardId;
 	
-	@Column(name = "create_date")
-	private Date createDate;
+	@Column(name = "create_time")
+	private Date createTime;
 	
 	@ManyToOne
 	@JoinColumn(name = "user_id")
@@ -77,12 +85,12 @@ public class Post extends BaseDomain {
 		this.boardId = boardId;
 	}
 
-	public Date getCreateDate() {
-		return createDate;
+	public Date getCreateTime() {
+		return createTime;
 	}
 
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
 	}
 
 	public User getUser() {
