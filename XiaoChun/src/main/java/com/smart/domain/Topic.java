@@ -2,7 +2,11 @@ package com.smart.domain;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -16,23 +20,42 @@ public class Topic extends BaseDomain {
 	 */
 	private static final long serialVersionUID = -8904128877585555604L;
 
+	/**
+	 * 精华主题帖子
+	 */
+	public static final int DIGEST_TOPIC = 1;
+	/**
+	 * 普通的主题帖子
+	 */
+	public static final int NOT_DIGEST_TOPIC = 0;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "topic_id")
 	private int topicId;
 	
+    @Column(name = "topic_title")
 	private String topicTitle;
 	
+    @Column(name = "create_time")
 	private Date createTime;
 	
+    @Column(name = "last_post")
 	private Date lastPost;
 	
+    @Column(name = "topic_views")
 	private int views;
 	
+    @Column(name = "topic_replies")
 	private int replies;
 	
-	private String digest;
+	private int digest = NOT_DIGEST_TOPIC;
 	
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
+
+    // TODO:Declare mainPost field
 
 	public int getTopicId() {
 		return topicId;
@@ -82,11 +105,11 @@ public class Topic extends BaseDomain {
 		this.replies = replies;
 	}
 
-	public String getDigest() {
+	public int getDigest() {
 		return digest;
 	}
 
-	public void setDigest(String digest) {
+	public void setDigest(int digest) {
 		this.digest = digest;
 	}
 
