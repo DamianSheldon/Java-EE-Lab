@@ -2,9 +2,13 @@ package com.smart.domain;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -15,14 +19,18 @@ public class LoginLog extends BaseDomain {
 	 * 
 	 */
 	private static final long serialVersionUID = 5274963093503898825L;
-
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "login_log_id")
 	private int loginLogId;
 	
 	private String ip;
-	
+
+    @Column(name = "login_datatime")
 	private Date loginDate;
 	
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
 
