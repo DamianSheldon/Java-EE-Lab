@@ -29,7 +29,7 @@ public class Board extends BaseDomain {
 	@Id
 	@Column(name = "board_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int boradId;
+	private int boardId;
 	
 	@Column(name = "board_name")
 	private String boardName;
@@ -43,12 +43,12 @@ public class Board extends BaseDomain {
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "manBoards", fetch = FetchType.LAZY)
     private Set<User> users = new HashSet<User>();
 
-	public int getBoradId() {
-		return boradId;
+	public int getBoardId() {
+		return boardId;
 	}
 
-	public void setBoradId(int boradId) {
-		this.boradId = boradId;
+	public void setBoardId(int boradId) {
+		this.boardId = boradId;
 	}
 
 	public String getBoardName() {
