@@ -1,5 +1,8 @@
 package com.smart.dao;
 
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
+
 import java.util.List;
 
 import org.testng.annotations.Test;
@@ -26,4 +29,20 @@ public class BoardDaoTests extends BaseDaoTest {
         }
 		
 	}
+
+    @Test
+    @DataSet(value = "XiaoChun.Boards.xls")
+    @ExpectedDataSet(value = "XiaoChun.ExpectedBoards.xls")
+    public void testRemoveBoard() throws Exception {
+        Board board = boardDao.get(7);
+        boardDao.remove(board);
+    }
+
+    @Test
+    @DataSet("XiaoChun.Boards.xls")
+    public void testGetBoard() throws Exception {
+        Board board = boardDao.load(1);
+        assertNotNull(board);
+        assertEquals(board.getBoardName(), "SpringMVC");
+    }
 }
