@@ -1,7 +1,10 @@
 package com.smart.dao;
 
+import org.springframework.stereotype.Repository;
+
 import com.smart.domain.Topic;
 
+@Repository
 public class TopicDao extends BaseDao<Topic> {
 
 	private static final String GET_BOARD_DIGEST_TOPIC = "from Topic t where t.boardId = ? and digest > 0 "
