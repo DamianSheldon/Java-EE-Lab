@@ -2,6 +2,7 @@ package com.smart.service;
 
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
@@ -68,11 +69,29 @@ public class UserServiceTests extends BaseServiceTest {
 
     @Test
     public void lockUser() {
-    
+        User user = new User();
+        user.setUserName("tom");
+        user.setPassword("1234");
+        doReturn(user).when(userDao).getUserByUserName("tom");
+        doNothing().when(userDao).update(user);
+
+        userService.lockUser("tom");
+        User u = userService.getUserByUserName("tom");
+
+        assertEquals(User.USER_LOCK, u.getLocked());
     }
 
     @Test
     public void unlockUser() {
-    
+        User user = new User();
+        user.setUserName("tom");
+        user.setPassword("1234");
+        user.setLocked(User.USER_LOCK);
+        doReturn(user).when(userDao).getUserByUserName("tom");
+        doNothing().when(userDao).update(user);
+
+        userService.unlockUser("tom");
+        User u = userService.getUserByUserName("tom");
+        assertEquals(User.USER_UNLOCK, u.getLocked());
     }
 }
