@@ -12,7 +12,7 @@ import static org.testng.Assert.assertEquals;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.springframework.test.util.ReflectionTestUtils;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.smart.dao.UserDao;
@@ -23,7 +23,7 @@ public class UserServiceTests extends BaseServiceTest {
     private UserDao userDao;
     private UserService userService;
 
-    @BeforeClass
+    @BeforeMethod
     public void init() {
         userDao = mock(UserDao.class);
         userService = new UserService();
