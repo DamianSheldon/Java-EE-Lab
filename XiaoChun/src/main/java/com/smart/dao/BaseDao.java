@@ -34,7 +34,7 @@ public class BaseDao<T> {
 		return (T) getHibernateTemplate().get(entityClass, id);
 	}
 	
-	public List<T> loadAll(Serializable id) {
+	public List<T> loadAll() {
 		return getHibernateTemplate().loadAll(entityClass);
 	}
 	
