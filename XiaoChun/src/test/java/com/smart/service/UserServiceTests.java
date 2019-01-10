@@ -1,6 +1,8 @@
 package com.smart.service;
 
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -52,7 +54,16 @@ public class UserServiceTests extends BaseServiceTest {
 
     @Test
     public void testGetUserByUserName() {
-        
+       User user = new User();
+       user.setUserName("tom");
+       user.setPassword("1234");
+       user.setCredit(100);
+       doReturn(user).when(userDao).getUserByUserName("tom");
+
+       User u = userService.getUserByUserName("tom");
+       assertNotNull(u);
+       assertEquals(u.getUserName(), user.getUserName());
+       verify(userDao, times(1)).getUserByUserName("tom");
     }
 
     @Test
