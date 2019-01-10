@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "t_topic")
@@ -55,7 +56,11 @@ public class Topic extends BaseDomain {
 	@JoinColumn(name = "user_id")
 	private User user;
 
-    // TODO:Declare mainPost field
+    @JoinColumn(name = "board_id")
+    private int boardId;
+
+    @Transient
+    private MainPost mainPost = new MainPost();
 
 	public int getTopicId() {
 		return topicId;
@@ -119,6 +124,22 @@ public class Topic extends BaseDomain {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public int getBoardId() {
+		return boardId;
+	}
+
+	public void setBoardId(int boardId) {
+		this.boardId = boardId;
+	}
+
+	public MainPost getMainPost() {
+		return mainPost;
+	}
+
+	public void setMainPost(MainPost mainPost) {
+		this.mainPost = mainPost;
 	}
 	
 }
