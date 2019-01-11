@@ -56,7 +56,7 @@ public class Topic extends BaseDomain {
 	@JoinColumn(name = "user_id")
 	private User user;
 
-    @JoinColumn(name = "board_id")
+    @Column(name = "board_id")
     private int boardId;
 
     @Transient
