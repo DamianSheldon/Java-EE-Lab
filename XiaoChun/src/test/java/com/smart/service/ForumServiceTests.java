@@ -1,5 +1,6 @@
 package com.smart.service;
 
+import static org.junit.Assert.assertNull;
 import static org.testng.Assert.assertEquals;
 
 import java.util.Map;
@@ -72,8 +73,11 @@ public class ForumServiceTests extends BaseServiceTest {
     }
 
     @Test
+    @DataSet("XiaoChun.DataSet.xls")
     public void testRemoveTopic() {
-    
+        forumService.removeTopic(1);
+        Topic topicInDb = forumService.getTopicByTopicId(1);
+        assertNull(topicInDb);
     }
 
     @Test
