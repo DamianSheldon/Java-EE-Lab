@@ -15,6 +15,7 @@ import org.unitils.spring.annotation.SpringBean;
 
 import com.smart.domain.Board;
 import com.smart.domain.MainPost;
+import com.smart.domain.Post;
 import com.smart.domain.Topic;
 import com.smart.domain.User;
 import com.smart.test.dataset.util.XlsDataSetBeanFactory;
@@ -81,8 +82,26 @@ public class ForumServiceTests extends BaseServiceTest {
     }
 
     @Test
+    @DataSet("XiaoChun.DataSet.xls")
     public void testAddPost() throws Exception {
-    
+        Post post = XlsDataSetBeanFactory.createBean(ForumServiceTests.class, "XiaoChun.DataSet.xls", "t_post", Post.class);
+
+        User user = XlsDataSetBeanFactory.createBean(ForumServiceTests.class, "XiaoChun.DataSet.xls", "t_user", User.class);
+        post.setUser(user);
+
+        Topic topic = new Topic();
+        topic.setTopicId(1);
+        post.setTopic(topic);
+
+        forumService.addPost(post);
+
+        User userInDb = userService.getUserByUserName("tom");
+
+        Topic topicInDb = forumService.getTopicByTopicId(1);
+
+        assertEquals(post.getPostId() > 1, true);
+        assertEquals(userInDb.getCredit(), 105);
+        assertEquals(topicInDb.getReplies(), 2);
     }
 
     @Test
