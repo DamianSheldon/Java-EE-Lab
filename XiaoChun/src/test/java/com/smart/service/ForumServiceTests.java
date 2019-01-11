@@ -105,8 +105,17 @@ public class ForumServiceTests extends BaseServiceTest {
     }
 
     @Test
+    @DataSet("XiaoChun.DataSet.xls")
     public void testRemovePost() {
-    
+        forumService.removePost(1);
+
+        Post postInDb = forumService.getPostById(1);
+        User userInDb = userService.getUserByUserName("tom");
+        Topic topicInDb = forumService.getTopicByTopicId(1);
+
+        assertNull(postInDb);
+        assertEquals(userInDb.getCredit(), 80);
+        assertEquals(topicInDb.getReplies(), 0);
     }
 
     @Test
