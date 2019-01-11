@@ -1,5 +1,7 @@
 package com.smart.service;
 
+import static org.testng.Assert.assertEquals;
+
 import java.util.Map;
 
 import org.hibernate.SessionFactory;
@@ -7,7 +9,11 @@ import org.hibernate.metadata.ClassMetadata;
 import org.hibernate.metadata.CollectionMetadata;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import org.unitils.dbunit.annotation.DataSet;
 import org.unitils.spring.annotation.SpringBean;
+
+import com.smart.domain.Board;
+import com.smart.test.dataset.util.XlsDataSetBeanFactory;
 
 public class ForumServiceTests extends BaseServiceTest {
     @SpringBean("forumService")
@@ -33,8 +39,14 @@ public class ForumServiceTests extends BaseServiceTest {
     }
 
     @Test
+    @DataSet("XiaoChun.DataSet.xls")
     public void testAddBoard() throws Exception {
-    
+        Board board = XlsDataSetBeanFactory.createBean(ForumServiceTests.class, "XiaoChun.DataSet.xls", "t_board", Board.class);
+
+        forumService.addBoard(board);
+
+        Board boardInDb = forumService.getBoardById(board.getBoardId());
+        assertEquals(boardInDb.getBoardName(), "育儿");
     }
 
     @Test
