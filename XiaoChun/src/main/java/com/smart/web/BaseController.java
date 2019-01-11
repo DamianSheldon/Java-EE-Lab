@@ -14,7 +14,7 @@ public class BaseController {
         return (User) request.getSession().getAttribute(CommonConstant.USER_CONTEXT);
     }
 
-    protected void setSeesionUser(HttpServletRequest request, User user) {
+    protected void setSessionUser(HttpServletRequest request, User user) {
         request.getSession().setAttribute(CommonConstant.USER_CONTEXT, user);
     }
     
