@@ -131,8 +131,12 @@ public class ForumServiceTests extends BaseServiceTest {
     }
 
     @Test
+    @DataSet("XiaoChun.DataSet.xls")
     public void testAddBoardManager() {
-    
+        forumService.addBoardManager(1, "tom");
+
+        User userInDb = userService.getUserByUserName("tom");
+        assertEquals(userInDb.getManBoards().size() > 0, true);
     }
 
 }
