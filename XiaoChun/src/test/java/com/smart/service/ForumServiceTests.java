@@ -119,8 +119,15 @@ public class ForumServiceTests extends BaseServiceTest {
     }
 
     @Test
+    @DataSet("XiaoChun.DataSet.xls")
     public void testMakeDigestTopic() throws Exception {
-    
+         forumService.makeDigestTopic(1);
+
+         User userInDb = userService.getUserByUserName("tom");
+         Topic topicInDb = forumService.getTopicByTopicId(1);
+
+         assertEquals(userInDb.getCredit(), 200);
+         assertEquals(topicInDb.getDigest(), Topic.DIGEST_TOPIC);
     }
 
     @Test
