@@ -13,6 +13,9 @@ import org.unitils.dbunit.annotation.DataSet;
 import org.unitils.spring.annotation.SpringBean;
 
 import com.smart.domain.Board;
+import com.smart.domain.MainPost;
+import com.smart.domain.Topic;
+import com.smart.domain.User;
 import com.smart.test.dataset.util.XlsDataSetBeanFactory;
 
 public class ForumServiceTests extends BaseServiceTest {
@@ -50,8 +53,22 @@ public class ForumServiceTests extends BaseServiceTest {
     }
 
     @Test
+    @DataSet("XiaoChun.DataSet.xls")
     public void testAddTopic() throws Exception {
-    
+        Topic topic = XlsDataSetBeanFactory.createBean(ForumServiceTests.class, "XiaoChun.DataSet.xls", "t_topic", Topic.class);
+        User user = XlsDataSetBeanFactory.createBean(ForumServiceTests.class, "XiaoChun.DataSet.xls", "t_user", User.class);
+        MainPost post = XlsDataSetBeanFactory.createBean(ForumServiceTests.class, "XiaoChun.DataSet.xls", "t_post", MainPost.class);
+
+        topic.setUser(user);
+        topic.setMainPost(post);
+        forumService.addTopic(topic);
+
+        Board boardInDb = forumService.getBoardById(1);
+        User userInDb = userService.getUserByUserName("tom");
+
+        assertEquals(boardInDb.getTopicNum(), 1);
+        assertEquals(userInDb.getCredit(), 110);
+        assertEquals(topic.getTopicId() > 0, true);
     }
 
     @Test
