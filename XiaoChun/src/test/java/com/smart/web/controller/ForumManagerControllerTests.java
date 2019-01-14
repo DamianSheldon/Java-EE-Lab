@@ -41,7 +41,16 @@ public class ForumManagerControllerTests extends BaseWebTest {
 
     @Test
     public void addBoard() throws Exception {
-    
+        request.setRequestURI("/forum/addBoard");
+        request.setMethod("POST");
+
+        Board board = new Board();
+        board.setBoardName("SpringMVC");
+        board.setBoardDesc("SpringMVC experiences~~");
+
+        String viewName = controller.addBoard(board);
+
+        assertEquals(viewName, "/addBoardSuccess");
     }
 
     @Test
