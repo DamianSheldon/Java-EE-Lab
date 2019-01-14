@@ -31,7 +31,12 @@ public class ForumManagerControllerTests extends BaseWebTest {
 
     @Test
     public void addBoardPage() throws Exception {
-    
+        request.setRequestURI("/forum/addBoardPage");
+        request.setMethod("GET");
+
+        String viewName = controller.addBoardPage();
+
+        assertEquals(viewName, "/addBoard");
     }
 
     @Test
