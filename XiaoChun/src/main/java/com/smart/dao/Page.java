@@ -57,11 +57,11 @@ public class Page implements Serializable {
 		return start / pageSize + 1;
 	}
 	
-	public boolean hasNextPage() {
+	public boolean isHasNextPage() {
 		return getCurrentPageNo() < getTotalPageCount();
 	}
 	
-	public boolean hasPreviousPage() {
+	public boolean isHasPreviousPage() {
 		return getCurrentPageNo() > 1;
 	}
 	
