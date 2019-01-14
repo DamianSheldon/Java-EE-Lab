@@ -96,7 +96,15 @@ public class ForumManagerControllerTests extends BaseWebTest {
 
     @Test
     public void userLockManage() throws Exception {
-    
+        request.setRequestURI("/forum/userLockManage");
+        request.setParameter("locked", "1");
+        request.setParameter("userName", "tom");
+        request.setMethod("POST");
+
+        ModelAndView mav = controller.userLockManage("tom", "1");
+
+        assertNotNull(mav);
+        assertEquals(mav.getViewName(), "/success");
     }
 
 }
