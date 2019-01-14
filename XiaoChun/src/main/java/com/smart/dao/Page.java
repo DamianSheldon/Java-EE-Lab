@@ -31,7 +31,11 @@ public class Page implements Serializable {
 		this.pageSize = pageSize;
 		this.data = data;
 	}
-	
+
+    public long getTotalCount() {
+        return this.totalCount;
+    }
+
 	public long getTotalPageCount() {
 		if (totalCount % pageSize == 0) {
 			return totalCount / pageSize;
@@ -40,7 +44,15 @@ public class Page implements Serializable {
 			return totalCount / pageSize + 1;
 		}
 	}
-	
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public List getResult() {
+        return data;
+    }
+
 	public long getCurrentPageNo () {
 		return start / pageSize + 1;
 	}
