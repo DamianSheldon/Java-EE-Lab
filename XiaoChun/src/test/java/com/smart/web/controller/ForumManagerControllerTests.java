@@ -83,7 +83,15 @@ public class ForumManagerControllerTests extends BaseWebTest {
 
     @Test
     public void userLockManagePage() throws Exception {
-    
+        request.setRequestURI("/forum/userLockManagePage");
+        request.setMethod("GET");
+
+        ModelAndView mav = controller.userLockManagePage();
+        List<User> users = (List<User>) mav.getModelMap().get("users");
+
+        assertNotNull(mav);
+        assertNotNull(users);
+        assertEquals(mav.getViewName(), "/userLockManage");
     }
 
     @Test
