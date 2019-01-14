@@ -10,6 +10,7 @@ import org.testng.annotations.Test;
 import org.unitils.spring.annotation.SpringBeanByType;
 
 import com.smart.domain.Board;
+import com.smart.domain.User;
 import com.smart.web.ForumManagerController;
 
 public class ForumManagerControllerTests extends BaseWebTest {
@@ -55,7 +56,18 @@ public class ForumManagerControllerTests extends BaseWebTest {
 
     @Test
     public void setBoardManagerPage() throws Exception {
-    
+        request.setRequestURI("/forum/setBoardManagerPage");
+        request.setMethod("GET");
+
+        ModelAndView mav = controller.setBoardManagerPage();
+        List<Board> boards = (List<Board>) mav.getModelMap().get("boards");
+        List<User> users = (List<User>) mav.getModelMap().get("users");
+
+        assertNotNull(mav);
+        assertEquals(mav.getViewName(), "/setBoardManager");
+
+        assertNotNull(boards);
+        assertNotNull(users);
     }
 
     @Test
