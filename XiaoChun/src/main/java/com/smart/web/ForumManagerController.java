@@ -2,6 +2,7 @@ package com.smart.web;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,7 +19,17 @@ public class ForumManagerController extends BaseController {
     private ForumService forumService;
     private UserService userService;
 
-    @RequestMapping(value = "/index", method = RequestMethod.GET)
+    @Autowired
+    public void setForumService(ForumService forumService) {
+		this.forumService = forumService;
+	}
+    
+    @Autowired
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
+
+	@RequestMapping(value = "/index", method = RequestMethod.GET)
     public ModelAndView listAllBoards() {
         ModelAndView view = new ModelAndView();
         List<Board> boards = forumService.getAllBoards();
