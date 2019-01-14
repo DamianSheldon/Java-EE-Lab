@@ -7,7 +7,7 @@ import org.testng.annotations.BeforeClass;
 import org.unitils.UnitilsTestNG;
 import org.unitils.spring.annotation.SpringApplicationContext;
 
-@SpringApplicationContext({"classpath:/applicationContext.xml", "classpath:xiaochun-servlet.xml"})
+@SpringApplicationContext({"classpath:/applicationContext.xml", "classpath:/xiaochun-servlet.xml"})
 public class BaseWebTest extends UnitilsTestNG {
     
     public MockHttpServletRequest request;
