@@ -72,7 +72,13 @@ public class ForumManagerControllerTests extends BaseWebTest {
 
     @Test
     public void setBoardManager() throws Exception {
-    
+        request.setRequestURI("/forum/setBoardManager");
+        request.setMethod("POST");
+
+        ModelAndView mav = controller.setBoardManager("tom", "1");
+
+        assertNotNull(mav);
+        assertEquals(mav.getViewName(), "/success");
     }
 
     @Test
