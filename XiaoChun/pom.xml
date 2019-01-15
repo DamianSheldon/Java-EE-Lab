@@ -275,10 +275,14 @@
                 <artifactId>maven-jetty-plugin</artifactId>
                 <version>6.1.25</version>
                 <configuration>
-                    <systemProperty>
-                        <name>CONFFILE_PATH</name>
-                        <value>classpath:jdbc.properties</value>
-                    </systemProperty>
+                    <!--<webDefaultXml>webdefault.xml</webDefaultXml>-->
+                    <jettyEnvXml>src/main/resources/jetty.xml</jettyEnvXml>
+                    <systemProperties>
+                        <systemProperty>
+                            <name>CONFFILE_PATH</name>
+                            <value>classpath:jdbc.properties</value>
+                        </systemProperty>
+                    </systemProperties>
                     <connectors>
                         <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
                             <port>8080</port>
