@@ -275,6 +275,10 @@
                 <artifactId>maven-jetty-plugin</artifactId>
                 <version>6.1.25</version>
                 <configuration>
+                    <systemProperty>
+                        <name>CONFFILE_PATH</name>
+                        <value>classpath:jdbc.properties</value>
+                    </systemProperty>
                     <connectors>
                         <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
                             <port>8080</port>
