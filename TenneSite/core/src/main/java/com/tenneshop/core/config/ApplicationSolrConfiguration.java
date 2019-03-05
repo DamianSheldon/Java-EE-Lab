@@ -40,8 +40,8 @@ public class ApplicationSolrConfiguration {
         return new SolrConfiguration(primaryCatalogSolrClient(), reindexCatalogSolrClient(), adminCatalogSolrClient());
     }
 
-    @Bean
-    protected SearchService blSearchService() {
-        return new SolrSearchServiceImpl();
-    }
+//    @Bean
+//    protected SearchService blSearchService() {
+//        return new SolrSearchServiceImpl();
+//    }
 }
